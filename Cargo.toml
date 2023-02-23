@@ -1,0 +1,27 @@
+[package]
+name = "wasi-print"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["staticlib", "cdylib"]
+
+[profile.release]
+panic = "abort"
+
+[profile.dev]
+panic = "abort"
+
+[dependencies.dlmalloc]
+version = "0.2"
+default-features = false
+features = ["global"]
+
+[dependencies.wasi]
+version = "0.11"
+default-features = false
+
+[dependencies.compiler_builtins]
+version = "0.1"
+default-features = false
+features = ["mem"]
