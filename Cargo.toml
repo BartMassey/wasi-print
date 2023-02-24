@@ -2,6 +2,12 @@
 name = "wasi-print"
 version = "0.2.0"
 edition = "2021"
+authors = ["Bart Massey <bart.massey@gmail.com>"]
+description = "WASI print and panic library for WASM no_std."
+license = "mit"
+repository = "https://github.com/BartMassey/wasi-print"
+keywords = ["wasi", "print", "panic_handler"]
+categories = ["no-std", "wasm"]
 
 [lib]
 path = "src/lib.rs"
@@ -26,3 +32,6 @@ default-features = false
 version = "0.1"
 default-features = false
 features = ["mem"]
+
+[badges.maintenance]
+status = "actively-developed"

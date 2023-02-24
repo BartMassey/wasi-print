@@ -1,5 +1,5 @@
+#![doc(html_root_url = "https://docs.rs/wasi-print/0.2.0")]
 #![feature(macro_metavar_expr)]
-
 #![no_std]
 
 /*!
@@ -43,9 +43,9 @@ This work is licensed under the "MIT License". Please see the file
 `LICENSE.txt` in this distribution for license terms.
 */
 
-extern crate wasi;
 extern crate alloc;
 extern crate dlmalloc;
+extern crate wasi;
 
 pub use alloc::format;
 
