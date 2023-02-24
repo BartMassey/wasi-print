@@ -1,5 +1,5 @@
 ![Maintenance](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
-[![CI](https://github.com/BartMassey/wasi-print/actions/workflows/main.yml/badge.svg)](https://github.com/BartMassey/wasi-print/actions)
+[![CI](https://github.com/BartMassey/wasi-print/actions/workflows/rust.yml/badge.svg)](https://github.com/BartMassey/wasi-print/actions)
 [![crates-io](https://img.shields.io/crates/v/wasi-print.svg)](https://crates.io/crates/wasi-print)
 [![api-docs](https://docs.rs/wasi-print/badge.svg)](https://docs.rs/wasi-print)
 
