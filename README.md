@@ -34,3 +34,8 @@ Figuring out how to write this was made *much* easier by
 this excellent [blog
 post](https://dev.to/thepuzzlemaker/nostd-with-wasi-is-more-complicated-than-i-thought-it-would-be-14j7)
 by "James [Undefined]".
+
+# License
+
+This work is licensed under the "MIT License". Please see the file
+`LICENSE.txt` in this distribution for license terms.
