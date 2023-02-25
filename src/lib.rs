@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/wasi-print/0.2.1")]
+#![doc(html_root_url = "https://docs.rs/wasi-print/0.2.2")]
 #![feature(macro_metavar_expr)]
 #![feature(doc_cfg)]
 #![no_std]

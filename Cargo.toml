@@ -1,6 +1,6 @@
 [package]
 name = "wasi-print"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 authors = ["Bart Massey <bart.massey@gmail.com>"]
 description = "WASI print and panic library for WASM no_std."
