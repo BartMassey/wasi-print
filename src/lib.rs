@@ -1,5 +1,6 @@
-#![doc(html_root_url = "https://docs.rs/wasi-print/0.2.0")]
-#![feature(macro_metavar_expr)]
+#![doc(html_root_url = "https://docs.rs/wasi-print/0.2.1")]
+#![cfg_attr(feature = "print", feature(macro_metavar_expr))]
+#![cfg_attr(feature = "print", feature(doc_cfg))]
 #![no_std]
 
 /*!
@@ -30,6 +31,17 @@ pub extern "C" fn math_add(x: i32, y: i32) -> i32 {
 }
 ```
 
+# Features
+
+* `print`: Include printing code. This requires nightly for
+  a variety of reasons.
+* `panic_handler`: Provide a panic handler.
+
+# Notes
+
+When used without the `print` feature, this crate can be
+built on stable Rust.
+
 # Acknowledgments
 
 Figuring out how to write this was made *much* easier by
@@ -43,18 +55,25 @@ This work is licensed under the "MIT License". Please see the file
 `LICENSE.txt` in this distribution for license terms.
 */
 
+#[cfg(feature = "print")]
 extern crate alloc;
+#[cfg(feature = "print")]
 extern crate dlmalloc;
+#[cfg(feature = "print")]
 extern crate wasi;
 
+#[cfg_attr(feature = "print", doc(cfg(feature = "print")))]
 pub use alloc::format;
 
+#[cfg(feature = "print")]
 #[global_allocator]
 static A: dlmalloc::GlobalDlmalloc = dlmalloc::GlobalDlmalloc;
 
+#[cfg(feature = "print")]
 macro_rules! mkprint {
     ($print:ident, $println:ident, $fd:literal) => {
         /// Print to stdio without a trailing newline.
+        #[doc(cfg(feature = "print"))]
         #[macro_export]
         macro_rules! $print {
             ($$fmt:literal $$(, $$args:tt)* $$(,)?) => {
@@ -62,6 +81,7 @@ macro_rules! mkprint {
             };
         }
         /// Print to stdio with a trailing newline.
+        #[doc(cfg(feature = "print"))]
         #[macro_export]
         macro_rules! $println {
             ($$fmt:literal $$(, $$args:tt)* $$(,)?) => {
@@ -72,7 +92,10 @@ macro_rules! mkprint {
     };
 }
 
+#[cfg(feature = "print")]
 mkprint!(print, println, 1);
+
+#[cfg(feature = "print")]
 mkprint!(eprint, eprintln, 2);
 
 /// Attempt to terminate the current execution by raising a
@@ -83,15 +106,18 @@ pub fn abort() -> Result<(), wasi::Errno> {
     unsafe { wasi::proc_raise(wasi::SIGNAL_ABRT) }
 }
 
+#[cfg_attr(feature = "print", doc(cfg(feature = "panic-handler")))]
 /// Handle a `panic()` in a WASI-compatible way.
 #[panic_handler]
 #[no_mangle]
-pub extern "C" fn panic_handler(panic_info: &core::panic::PanicInfo) -> ! {
-    eprintln!("{}", panic_info);
+pub extern "C" fn panic_handler(_panic_info: &core::panic::PanicInfo) -> ! {
+    #[cfg(feature = "print")]
+    eprintln!("{}", _panic_info);
     let _ = abort();
     loop {}
 }
 
+#[cfg_attr(feature = "print", doc(cfg(feature = "print")))]
 /// Print the text of `s` to the WASI file descriptor `fd`.
 pub fn print_fd(fd: u32, s: &str) -> Result<wasi::Size, wasi::Errno> {
     if s.len() > u32::MAX as usize {

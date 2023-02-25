@@ -1,6 +1,6 @@
 [package]
 name = "wasi-print"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 authors = ["Bart Massey <bart.massey@gmail.com>"]
 description = "WASI print and panic library for WASM no_std."
@@ -22,6 +22,7 @@ panic = "abort"
 [dependencies.dlmalloc]
 version = "0.2"
 default-features = false
+optional = true
 features = ["global"]
 
 [dependencies.wasi]
@@ -31,7 +32,13 @@ default-features = false
 [dependencies.compiler_builtins]
 version = "0.1"
 default-features = false
+optional = true
 features = ["mem"]
 
 [badges.maintenance]
 status = "actively-developed"
+
+[features]
+default = ["print", "panic-handler"]
+print = ["dlmalloc", "compiler_builtins"]
+panic-handler = []

@@ -4,7 +4,7 @@
 [![api-docs](https://docs.rs/wasi-print/badge.svg)](https://docs.rs/wasi-print)
 
 # wasi-print: : implementation of Rust print macros and similar for no_std WASI
-Bart Massey 2023 (version 0.2.0)
+Bart Massey 2023 (version 0.2.1)
 
 This crate contains basic niceties for writing `no_std`
 modules for [WASI](https://wasi.dev/). `wasi-print` provides:
@@ -32,6 +32,17 @@ pub extern "C" fn math_add(x: i32, y: i32) -> i32 {
     result
 }
 ```
+
+## Features
+
+* `print`: Include printing code. This requires nightly for
+  a variety of reasons.
+* `panic_handler`: Provide a panic handler.
+
+## Notes
+
+When used without the `print` feature, this crate can be
+built on stable Rust.
 
 ## Acknowledgments
 
