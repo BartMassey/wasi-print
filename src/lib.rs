@@ -37,11 +37,6 @@ pub extern "C" fn math_add(x: i32, y: i32) -> i32 {
   a variety of reasons.
 * `panic_handler`: Provide a panic handler.
 
-# Notes
-
-When used without the `print` feature, this crate can be
-built on stable Rust.
-
 # Acknowledgments
 
 Figuring out how to write this was made *much* easier by
