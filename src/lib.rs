@@ -1,6 +1,6 @@
 #![doc(html_root_url = "https://docs.rs/wasi-print/0.2.1")]
-#![cfg_attr(feature = "print", feature(macro_metavar_expr))]
-#![cfg_attr(feature = "print", feature(doc_cfg))]
+#![feature(macro_metavar_expr)]
+#![feature(doc_cfg)]
 #![no_std]
 
 /*!
@@ -62,7 +62,8 @@ extern crate dlmalloc;
 #[cfg(feature = "print")]
 extern crate wasi;
 
-#[cfg_attr(feature = "print", doc(cfg(feature = "print")))]
+#[cfg(feature = "print")]
+#[doc(cfg(feature = "print"))]
 pub use alloc::format;
 
 #[cfg(feature = "print")]
@@ -106,7 +107,8 @@ pub fn abort() -> Result<(), wasi::Errno> {
     unsafe { wasi::proc_raise(wasi::SIGNAL_ABRT) }
 }
 
-#[cfg_attr(feature = "print", doc(cfg(feature = "panic-handler")))]
+#[cfg(feature = "panic-handler")]
+#[doc(cfg(feature = "panic-handler"))]
 /// Handle a `panic()` in a WASI-compatible way.
 #[panic_handler]
 #[no_mangle]
@@ -117,7 +119,8 @@ pub extern "C" fn panic_handler(_panic_info: &core::panic::PanicInfo) -> ! {
     loop {}
 }
 
-#[cfg_attr(feature = "print", doc(cfg(feature = "print")))]
+#[cfg(feature = "print")]
+#[doc(cfg(feature = "print"))]
 /// Print the text of `s` to the WASI file descriptor `fd`.
 pub fn print_fd(fd: u32, s: &str) -> Result<wasi::Size, wasi::Errno> {
     if s.len() > u32::MAX as usize {

@@ -20,4 +20,9 @@ jobs:
       run: cargo build --verbose
     - name: Build release
       run: cargo build --release --verbose
-
+    - name: Build release no features
+      run: cargo build --release --no-default-features
+    - name: Build release with print feature
+      run: cargo build --release --no-default-features --features=print
+    - name: Build release with panic-handler feature
+      run: cargo build --release --no-default-features --features=panic-handler
